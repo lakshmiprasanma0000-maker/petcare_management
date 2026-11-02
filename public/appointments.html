@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointments | LP PetCare</title>
+
+<style>
+:root {
+    --navy: #0c1932;
+    --navy2: #142c4a;
+    --teal: #69e0ce;
+    --cream: #f7f8f4;
+    --text: #20334b;
+    --muted: #738094;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+}
+header {
+    background: var(--navy);
+    color: white;
+    padding: 17px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+}
+.logo {
+    background: var(--teal);
+    color: var(--navy);
+    height: 48px;
+    width: 48px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+}
+.brand h2 { font-size: 24px; }
+.brand h2 span, footer span { color: var(--teal); }
+.brand small {
+    display: block;
+    color: #b9c9d9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 3px;
+}
+nav { display: flex; gap: 23px; flex-wrap: wrap; }
+nav a {
+    text-decoration: none;
+    color: #e2eaf4;
+    font-size: 14px;
+    font-weight: 600;
+}
+nav a:hover, nav a.active { color: var(--teal); }
+.banner {
+    padding: 48px 7% 55px;
+    color: white;
+    background:
+        radial-gradient(circle at 90% 20%, #1a7774 0, transparent 33%),
+        radial-gradient(circle at 5% 100%, #254f70 0, transparent 35%),
+        var(--navy);
+}
+.banner small {
+    color: var(--teal);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+.banner h1 { font-size: clamp(34px, 5vw, 48px); margin: 14px 0; }
+.banner h1 span { color: var(--teal); }
+.banner p { color: #c4d0df; line-height: 1.8; max-width: 570px; }
+.main {
+    max-width: 1150px;
+    margin: 45px auto;
+    padding: 0 22px;
+    display: grid;
+    grid-template-columns: .75fr 1.35fr;
+    gap: 30px;
+    align-items: start;
+}
+.side-panel {
+    background: var(--navy);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+}
+.side-panel h2 { font-size: 25px; line-height: 1.4; margin-bottom: 15px; }
+.side-panel h2 span { color: var(--teal); }
+.side-panel > p {
+    color: #c1cedd;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 28px;
+}
+.info { display: flex; gap: 13px; margin: 22px 0; align-items: flex-start; }
+.info-icon {
+    min-width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: #69e0ce1b;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+.info strong { font-size: 14px; display: block; margin: 2px 0 6px; }
+.info small { color: #b7c5d6; font-size: 12px; line-height: 1.7; }
+.note {
+    border: 1px solid #69e0ce50;
+    background: #69e0ce0d;
+    padding: 15px;
+    border-radius: 12px;
+    color: #d5e3ed;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 28px;
+}
+.form-card, .table-card {
+    background: white;
+    padding: 30px;
+    border: 1px solid #e5eae6;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px #142c4a0b;
+    min-width: 0;
+}
+.form-title {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e7ecea;
+}
+.form-title h2 { font-size: 25px; margin-bottom: 8px; }
+.form-title p, .table-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+.form-section {
+    color: #087e80;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 25px 0 17px;
+}
+.field { margin-bottom: 19px; }
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+input, select {
+    width: 100%;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid #dce4e7;
+    border-radius: 9px;
+    background: #fbfcfc;
+    color: var(--text);
+}
+input:focus, select:focus {
+    outline: 2px solid #69e0ce70;
+    border-color: #2bada0;
+}
+.submit-btn, .refresh-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 18px;
+    background: var(--navy);
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+}
+.submit-btn { width: 100%; margin-top: 5px; }
+.submit-btn:hover, .refresh-btn:hover { background: #087e80; }
+.submit-btn:disabled { opacity: .65; cursor: wait; }
+.privacy {
+    font-size: 11px;
+    color: #84909e;
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+#message {
+    display: none;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    overflow-wrap: anywhere;
+}
+#message.success { display: block; background: #e6f7ef; color: #176b48; }
+#message.error { display: block; background: #fff0ee; color: #a12e25; }
+.appointments-section {
+    max-width: 1200px;
+    margin: 0 auto 55px;
+    padding: 0 22px;
+}
+.table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+.table-heading h2 { font-size: 24px; margin-bottom: 7px; }
+.table-wrapper { width: 100%; overflow-x: auto; }
+table { width: 100%; min-width: 700px; border-collapse: collapse; }
+th, td {
+    text-align: left;
+    padding: 15px 14px;
+    border-bottom: 1px solid #e8ecef;
+    font-size: 13px;
+}
+th { background: #eaf8f4; color: var(--navy); white-space: nowrap; }
+.empty { text-align: center; padding: 25px; color: var(--muted); }
+footer {
+    background: var(--navy);
+    color: #b9c8d8;
+    text-align: center;
+    padding: 27px 15px;
+    font-size: 12px;
+    line-height: 2;
+}
+footer strong { color: white; font-size: 19px; }
+@media (max-width: 800px) {
+    header { justify-content: center; }
+    nav { justify-content: center; gap: 16px; }
+    .main { grid-template-columns: 1fr; margin: 28px auto; }
+    .form-card, .table-card { padding: 23px 18px; }
+    .appointments-section { padding: 0 14px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <a class="brand" href="index.html">
+        <div class="logo">🐾</div>
+        <div>
+            <h2>LP <span>PetCare</span></h2>
+            <small>LOVE · PROTECT · CARE</small>
+        </div>
+    </a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="owners.html">Owners</a>
+        <a href="pets.html">Pets</a>
+        <a href="appointments.html" class="active">Appointments</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <small>LP PETCARE · VETERINARY SERVICES</small>
+    <h1>Book a <span>Visit.</span><br>Show Them You Care.</h1>
+    <p>Register your pet's veterinary appointment and view all appointments stored in your LP PetCare database.</p>
+</section>
+
+<main class="main">
+    <aside class="side-panel">
+        <h2>A healthier life<br>starts with <span>care.</span></h2>
+        <p>Keep track of veterinary visits and give your pet the care and attention it deserves.</p>
+        <div class="info">
+            <div class="info-icon">🐶</div>
+            <div><strong>Pet Information</strong><small>Enter the ID of a pet registered in your database.</small></div>
+        </div>
+        <div class="info">
+            <div class="info-icon">📅</div>
+            <div><strong>Appointment Schedule</strong><small>Choose the preferred veterinary appointment date.</small></div>
+        </div>
+        <div class="info">
+            <div class="info-icon">🩺</div>
+            <div><strong>Doctor and Reason</strong><small>Record the veterinarian and reason for the visit.</small></div>
+        </div>
+        <div class="note">♥ Please check all information before registering an appointment.</div>
+    </aside>
+
+    <section class="form-card">
+        <div class="form-title">
+            <h2>Register Appointment</h2>
+            <p>Complete the fields below to register a veterinary visit.</p>
+        </div>
+
+        <div id="message" role="status" aria-live="polite"></div>
+
+        <form id="appointmentForm">
+            <div class="form-section">01 — PET DETAILS</div>
+            <div class="field">
+                <label for="petId">Pet ID *</label>
+                <input type="number" id="petId" name="pet_id"
+                       placeholder="Enter registered pet ID" min="1" step="1" required>
+            </div>
+
+            <div class="form-section">02 — APPOINTMENT DETAILS</div>
+            <div class="field">
+                <label for="doctorName">Doctor's Name *</label>
+                <input type="text" id="doctorName" name="doctor_name"
+                       placeholder="e.g. Dr. Ananya Sen" maxlength="45" required>
+            </div>
+
+            <div class="field">
+                <label for="appointmentDate">Appointment Date *</label>
+                <input type="date" id="appointmentDate" name="appointment_date" required>
+            </div>
+
+            <div class="field">
+                <label for="reason">Reason for Visit *</label>
+                <select id="reason" name="reason" required>
+                    <option value="">Select reason</option>
+                    <option>Routine vaccination</option>
+                    <option>Annual Dental Checkup</option>
+                    <option>Skin Allergy Treatment</option>
+                    <option>De-worming Checkup</option>
+                    <option>Ear infection check</option>
+                    <option>General Checkup</option>
+                    <option>Illness</option>
+                    <option>Injury</option>
+                    <option>Follow-up Visit</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Register Appointment →</button>
+            <p class="privacy">♥ Appointment details will be saved through your server.</p>
+        </form>
+    </section>
+</main>
+
+<section class="appointments-section">
+    <div class="table-card">
+        <div class="table-heading">
+            <div>
+                <h2>📋 All Appointments</h2>
+                <p>View all appointment records from your database.</p>
+            </div>
+            <button type="button" class="refresh-btn" id="refreshBtn">↻ Refresh</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>appointment_id</th>
+                        <th>pet_id</th>
+                        <th>doctor_name</th>
+                        <th>appointment_date</th>
+                        <th>reason</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentsTable">
+                    <tr><td colspan="5" class="empty">Loading appointments...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="tableMessage" role="status" aria-live="polite"
+           style="margin-top:15px;font-size:13px;color:#738094;"></p>
+    </div>
+</section>
+
+<footer>
+    <strong>LP <span>PetCare</span> 🐾</strong>
+    <p>Every little paw deserves love, comfort, and care.</p>
+    <p>Created with care by Lakshmi Prasanna</p>
+</footer>
+
+<script>
+const form = document.getElementById("appointmentForm");
+const dateInput = document.getElementById("appointmentDate");
+const message = document.getElementById("message");
+const tableBody = document.getElementById("appointmentsTable");
+const tableMessage = document.getElementById("tableMessage");
+const refreshBtn = document.getElementById("refreshBtn");
+
+function todayString() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+dateInput.min = todayString();
+
+function showMessage(text, type) {
+    message.textContent = text;
+    message.className = type;
+    message.style.display = "block";
+}
+
+async function readResponse(response) {
+    const text = await response.text();
+    let data;
+    try {
+        data = text ? JSON.parse(text) : {};
+    } catch {
+        throw new Error("Server returned an invalid response. Check server.js.");
+    }
+    if (!response.ok) {
+        throw new Error(data.message || `Request failed (${response.status}).`);
+    }
+    return data;
+}
+
+async function loadAppointments() {
+    tableBody.innerHTML = '<tr><td colspan="5" class="empty">Loading appointments...</td></tr>';
+    tableMessage.textContent = "";
+
+    try {
+        const response = await fetch("/api/appointments");
+        const appointments = await readResponse(response);
+
+        if (!Array.isArray(appointments)) {
+            throw new Error("The appointments API did not return a list.");
+        }
+
+        tableBody.replaceChildren();
+
+        if (appointments.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" class="empty">No appointments registered yet.</td></tr>';
+        } else {
+            appointments.forEach(a => {
+                const row = document.createElement("tr");
+                let date = a.appointment_date ?? "-";
+                if (typeof date === "string" && date.includes("T")) date = date.slice(0, 10);
+
+                [a.appointment_id, a.pet_id, a.doctor_name, date, a.reason].forEach(value => {
+                    const cell = document.createElement("td");
+                    cell.textContent = value === null || value === undefined ? "-" : String(value);
+                    row.appendChild(cell);
+                });
+                tableBody.appendChild(row);
+            });
+        }
+
+        tableMessage.textContent = "Total appointments: " + appointments.length;
+    } catch (error) {
+        tableBody.innerHTML = '<tr><td colspan="5" class="empty">Could not load appointments.</td></tr>';
+        tableMessage.textContent = "Error: " + error.message;
+    }
+}
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (dateInput.value < todayString()) {
+        showMessage("Please select today or a future date.", "error");
+        return;
+    }
+
+    const appointment = {
+        pet_id: Number(document.getElementById("petId").value),
+        doctor_name: document.getElementById("doctorName").value.trim(),
+        appointment_date: dateInput.value,
+        reason: document.getElementById("reason").value
+    };
+
+    if (!Number.isInteger(appointment.pet_id) || appointment.pet_id < 1) {
+        showMessage("Enter a valid Pet ID.", "error");
+        return;
+    }
+
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.textContent = "Registering...";
+
+    try {
+        const response = await fetch("/api/appointments", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(appointment)
+        });
+
+        const result = await readResponse(response);
+        showMessage(result.message || "Appointment registered successfully!", "success");
+        form.reset();
+        dateInput.min = todayString();
+        await loadAppointments();
+    } catch (error) {
+        console.error("Appointment registration failed:", error);
+        showMessage("Registration failed: " + error.message, "error");
+    } finally {
+        button.disabled = false;
+        button.textContent = "Register Appointment →";
+    }
+});
+
+refreshBtn.addEventListener("click", loadAppointments);
+loadAppointments();
+</script>
+</body>
+</html>

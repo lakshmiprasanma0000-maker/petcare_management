@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owners | LP PetCare</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #0c1932;
+    --teal: #69e0ce;
+    --cream: #f7f8f4;
+    --text: #20334b;
+    --muted: #738094;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+}
+
+header {
+    background: var(--navy);
+    color: white;
+    padding: 17px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    background: var(--teal);
+    color: var(--navy);
+    height: 48px;
+    width: 48px;
+    border-radius: 15px 15px 15px 5px;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+}
+
+.brand h2 {
+    font-size: 24px;
+}
+
+.brand h2 span,
+footer span {
+    color: var(--teal);
+}
+
+.brand small {
+    display: block;
+    color: #b9c9d9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 3px;
+}
+
+nav {
+    display: flex;
+    gap: 23px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: #e2eaf4;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--teal);
+}
+
+/* BANNER */
+
+.banner {
+    padding: 48px 7% 55px;
+    color: white;
+    background:
+        radial-gradient(circle at 90% 20%, #1a7774 0, transparent 33%),
+        radial-gradient(circle at 5% 100%, #254f70 0, transparent 35%),
+        var(--navy);
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::after {
+    content: "🐾";
+    position: absolute;
+    right: 8%;
+    top: 5px;
+    font-size: 145px;
+    opacity: 0.09;
+}
+
+.banner small {
+    color: var(--teal);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.banner h1 {
+    font-size: clamp(34px, 5vw, 48px);
+    margin: 14px 0;
+}
+
+.banner h1 span {
+    color: var(--teal);
+}
+
+.banner p {
+    color: #c4d0df;
+    line-height: 1.8;
+    max-width: 570px;
+    font-size: 15px;
+}
+
+/* MAIN */
+
+.main {
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 0 22px;
+}
+
+.form-card,
+.table-card {
+    background: white;
+    padding: 30px;
+    border: 1px solid #e5eae6;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px #142c4a0b;
+    margin-bottom: 30px;
+    min-width: 0;
+}
+
+.form-title {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e7ecea;
+}
+
+.form-title h2,
+.table-heading h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.form-title p,
+.table-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.field {
+    margin-bottom: 19px;
+    min-width: 0;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 9px;
+    color: #26394e;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid #dce4e7;
+    border-radius: 9px;
+    background: #fbfcfc;
+    color: var(--text);
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #2bada0;
+    box-shadow: 0 0 0 3px #69e0ce25;
+    background: white;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 85px;
+}
+
+.submit-btn,
+.refresh-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 18px;
+    background: var(--navy);
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.submit-btn:hover,
+.refresh-btn:hover {
+    background: #087e80;
+}
+
+.submit-btn:disabled,
+.refresh-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+#message {
+    display: none;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+#message.success {
+    display: block;
+    background: #e6f7ef;
+    color: #176b48;
+}
+
+#message.error {
+    display: block;
+    background: #fff0ee;
+    color: #a12e25;
+}
+
+/* OWNERS TABLE */
+
+.table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 15px 14px;
+    border-bottom: 1px solid #e8ecef;
+    font-size: 13px;
+}
+
+th {
+    background: #eaf8f4;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+tbody tr:hover {
+    background: #f8fbfa;
+}
+
+.empty {
+    text-align: center;
+    padding: 25px;
+    color: var(--muted);
+}
+
+footer {
+    background: var(--navy);
+    color: #b9c8d8;
+    text-align: center;
+    padding: 27px 15px;
+    font-size: 12px;
+    line-height: 2;
+}
+
+footer strong {
+    color: white;
+    font-size: 19px;
+}
+
+@media (max-width: 800px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .form-card,
+    .table-card {
+        padding: 23px 18px;
+    }
+
+    .main {
+        margin: 28px auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .banner {
+        padding: 38px 6%;
+    }
+
+    .main {
+        padding: 0 14px;
+    }
+
+    .brand h2 {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a class="brand" href="index.html">
+        <div class="logo">🐾</div>
+        <div>
+            <h2>LP <span>PetCare</span></h2>
+            <small>LOVE · PROTECT · CARE</small>
+        </div>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="owners.html" class="active">Owners</a>
+        <a href="pets.html">Pets</a>
+        <a href="appointments.html">Appointments</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <small>LP PETCARE · OWNER MANAGEMENT</small>
+    <h1>Meet the <span>Pet Owners.</span></h1>
+    <p>
+        Register pet owners and manage their contact information.
+        View all owner records saved in your LP PetCare database.
+    </p>
+</section>
+
+<main class="main">
+
+    <!-- OWNER REGISTRATION FORM -->
+
+    <section class="form-card">
+        <div class="form-title">
+            <h2>Register a Pet Owner</h2>
+            <p>Enter the owner's details below.</p>
+        </div>
+
+        <div id="message" role="status" aria-live="polite"></div>
+
+        <form id="ownerForm">
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="name">Owner Name *</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter full name"
+                        maxlength="100"
+                        required>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email Address *</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@email.com"
+                        maxlength="150"
+                        required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="phone">Phone Number *</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        pattern="[0-9]{10,15}"
+                        title="Enter 10 to 15 digits"
+                        maxlength="15"
+                        required>
+                </div>
+
+                <div class="field">
+                    <label for="address">Address *</label>
+                    <textarea
+                        id="address"
+                        name="address"
+                        placeholder="Enter complete address"
+                        maxlength="255"
+                        required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Register Owner →
+            </button>
+
+        </form>
+    </section>
+
+    <!-- ALL OWNERS TABLE -->
+
+    <section class="table-card">
+        <div class="table-heading">
+            <div>
+                <h2>👥 All Owners</h2>
+                <p>View all owner records stored in your database.</p>
+            </div>
+
+            <button type="button" class="refresh-btn" id="refreshBtn">
+                ↻ Refresh
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>owner_id</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>phone</th>
+                        <th>address</th>
+                    </tr>
+                </thead>
+
+                <tbody id="ownersTable">
+                    <tr>
+                        <td colspan="5" class="empty">
+                            Loading owners...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p id="tableMessage"
+           role="status"
+           aria-live="polite"
+           style="margin-top:15px;font-size:13px;color:#738094;">
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <strong>LP <span>PetCare</span> 🐾</strong>
+    <p>Every little paw deserves love, comfort, and care.</p>
+    <p>Created with care by Lakshmi Prasanna</p>
+</footer>
+
+<script>
+const form = document.getElementById("ownerForm");
+const message = document.getElementById("message");
+const ownersTable = document.getElementById("ownersTable");
+const tableMessage = document.getElementById("tableMessage");
+const refreshBtn = document.getElementById("refreshBtn");
+
+function showMessage(text, type) {
+    message.textContent = text;
+    message.className = type;
+    message.style.display = "block";
+}
+
+// Load all owner records from the backend.
+async function loadOwners() {
+    ownersTable.replaceChildren();
+
+    const loadingRow = document.createElement("tr");
+    const loadingCell = document.createElement("td");
+    loadingCell.colSpan = 5;
+    loadingCell.className = "empty";
+    loadingCell.textContent = "Loading owners...";
+    loadingRow.appendChild(loadingCell);
+    ownersTable.appendChild(loadingRow);
+
+    tableMessage.textContent = "";
+
+    try {
+        const response = await fetch("/api/owners");
+
+        if (!response.ok) {
+            throw new Error("Unable to load owners.");
+        }
+
+        const owners = await response.json();
+
+        if (!Array.isArray(owners)) {
+            throw new Error("Unexpected data received from the server.");
+        }
+
+        ownersTable.replaceChildren();
+
+        if (owners.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 5;
+            cell.className = "empty";
+            cell.textContent = "No owners registered yet.";
+            row.appendChild(cell);
+            ownersTable.appendChild(row);
+            tableMessage.textContent = "Total owners: 0";
+            return;
+        }
+
+        owners.forEach(owner => {
+            const row = document.createElement("tr");
+
+            [
+                owner.owner_id,
+                owner.name,
+                owner.email,
+                owner.phone,
+                owner.address
+            ].forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value ?? "-";
+                row.appendChild(cell);
+            });
+
+            ownersTable.appendChild(row);
+        });
+
+        tableMessage.textContent = "Total owners: " + owners.length;
+
+    } catch (error) {
+        ownersTable.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 5;
+        cell.className = "empty";
+        cell.textContent =
+            "Unable to load owners. Check that your server and GET /api/owners route are running.";
+        row.appendChild(cell);
+        ownersTable.appendChild(row);
+    }
+}
+
+// Register a new owner.
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const owner = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        address: document.getElementById("address").value.trim()
+    };
+
+    const button = form.querySelector(".submit-btn");
+    button.disabled = true;
+    button.textContent = "Registering...";
+
+    try {
+        const response = await fetch("/api/owners", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(owner)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Unable to register owner.");
+        }
+
+        showMessage(
+            result.message || "Owner registered successfully!",
+            "success"
+        );
+
+        form.reset();
+
+        // Refresh the table to display the new owner.
+        await loadOwners();
+
+    } catch (error) {
+        showMessage(
+            error.message === "Failed to fetch"
+                ? "Could not connect to the server. Start your Node.js server and check the API routes."
+                : error.message,
+            "error"
+        );
+    } finally {
+        button.disabled = false;
+        button.textContent = "Register Owner →";
+    }
+});
+
+refreshBtn.addEventListener("click", loadOwners);
+
+// Load owner records when the page opens.
+loadOwners();
+</script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LP PetCare | Every Paw Matters</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0c1932;
+            --navy-light: #142c4a;
+            --teal: #69e0ce;
+            --cream: #f7f6ef;
+            --muted: #bac8d9;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--cream);
+            color: var(--navy);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* NAVIGATION BAR */
+
+        header {
+            background: var(--navy);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #28435d;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 49px;
+            height: 49px;
+            background: var(--teal);
+            border-radius: 15px 15px 15px 5px;
+            display: grid;
+            place-items: center;
+            color: var(--navy);
+            font-size: 27px;
+            box-shadow: 0 5px 20px #69e0ce30;
+        }
+
+        .brand-name {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-name span {
+            color: var(--teal);
+        }
+
+        .brand small {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e1e9f2;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--teal);
+        }
+
+        nav .nav-button {
+            background: var(--teal);
+            color: var(--navy);
+            padding: 12px 19px;
+            border-radius: 8px;
+        }
+
+        /* HERO / HOME SECTION */
+
+        .hero {
+            min-height: 590px;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background:
+                radial-gradient(
+                    ellipse at 8% 12%,
+                    #244d70 0%,
+                    transparent 37%
+                ),
+                radial-gradient(
+                    ellipse at 93% 90%,
+                    #12645f 0%,
+                    transparent 35%
+                ),
+                var(--navy);
+            color: white;
+            padding: 65px 8%;
+            display: grid;
+            grid-template-columns: 1fr 0.95fr;
+            align-items: center;
+            gap: 55px;
+        }
+
+        /* Small decorative paw pattern */
+
+        .paw-pattern {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.12;
+            background-image:
+                radial-gradient(
+                    ellipse at center,
+                    transparent 0 35%,
+                    #69e0ce 36% 38%,
+                    transparent 39%
+                );
+            background-size: 75px 75px;
+            mask-image: linear-gradient(
+                110deg,
+                transparent 0%,
+                black 45%,
+                transparent 100%
+            );
+        }
+
+        .circle {
+            position: absolute;
+            border: 1px solid #69e0ce35;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .circle-one {
+            width: 370px;
+            height: 370px;
+            top: -230px;
+            right: 10%;
+            box-shadow:
+                0 0 0 35px #69e0ce08,
+                0 0 0 70px #69e0ce08;
+        }
+
+        .circle-two {
+            width: 260px;
+            height: 260px;
+            bottom: -190px;
+            left: 28%;
+            box-shadow: 0 0 0 35px #69e0ce08;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 10px 16px;
+            border: 1px solid #69e0ce60;
+            border-radius: 30px;
+            background: #69e0ce10;
+            color: var(--teal);
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 68px);
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 23px;
+        }
+
+        .hero h1 span {
+            color: var(--teal);
+        }
+
+        .hero-content > p {
+            max-width: 490px;
+            color: #c2cede;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 29px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 21px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 750;
+            transition: 0.3s;
+        }
+
+        .button-primary {
+            background: var(--teal);
+            color: var(--navy);
+        }
+
+        .button-outline {
+            border: 1px solid #71859e;
+            color: white;
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+        }
+
+        .hero-note {
+            margin-top: 30px;
+            color: #a9bacd;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* PHOTO DISPLAY */
+
+        .hero-art {
+            position: relative;
+            max-width: 440px;
+            width: 100%;
+            margin: auto;
+            padding: 13px;
+            border-radius: 26px;
+            background: linear-gradient(
+                145deg,
+                #ffffff32,
+                #69e0ce16
+            );
+            border: 1px solid #ffffff35;
+            box-shadow: 0 25px 70px #00000045;
+            transform: rotate(2deg);
+        }
+
+        .hero-art::before {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border: 1px solid #ffffff40;
+            border-radius: 18px;
+            pointer-events: none;
+        }
+
+        .hero-art img {
+            width: 100%;
+            height: 365px;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 18px;
+        }
+
+        .floating-card {
+            position: absolute;
+            left: -35px;
+            bottom: 32px;
+            background: white;
+            color: var(--navy);
+            border-radius: 13px;
+            padding: 14px 18px;
+            box-shadow: 0 10px 30px #00000035;
+            transform: rotate(-2deg);
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .floating-card small {
+            display: block;
+            margin-top: 5px;
+            color: #637386;
+            font-size: 11px;
+        }
+
+        .floating-heart {
+            position: absolute;
+            top: -23px;
+            right: -18px;
+            background: var(--teal);
+            color: var(--navy);
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: grid;
+            place-items: center;
+            font-size: 27px;
+            box-shadow: 0 8px 25px #00000030;
+        }
+
+        /* QUICK OVERVIEW */
+
+        .overview {
+            background: var(--navy-light);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 28px 8%;
+            color: white;
+        }
+
+        .overview-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            padding: 8px;
+        }
+
+        .overview-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 13px;
+            background: #69e0ce18;
+            display: grid;
+            place-items: center;
+            color: var(--teal);
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .overview-item strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .overview-item small {
+            display: block;
+            margin-top: 5px;
+            color: #b9c7d9;
+            font-size: 11px;
+        }
+
+        /* SERVICES SECTION */
+
+        .services {
+            padding: 85px 8%;
+            position: relative;
+            background-color: var(--cream);
+            background-image:
+                radial-gradient(
+                    #173b5016 1px,
+                    transparent 1px
+                );
+            background-size: 21px 21px;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 45px;
+        }
+
+        .section-heading > span {
+            color: #087e80;
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 3px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(29px, 4vw, 39px);
+            margin: 15px 0;
+        }
+
+        .section-heading p {
+            color: #657387;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 23px;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border: 1px solid #e1e9e4;
+            border-radius: 19px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 25px #0c19320a;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px #0c19321a;
+            border-color: #91dcd0;
+        }
+
+        .service-icon {
+            width: 61px;
+            height: 61px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            background: #e1f6ef;
+            font-size: 29px;
+            margin-bottom: 23px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 13px;
+        }
+
+        .service-card p {
+            color: #697689;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 23px;
+        }
+
+        .service-card a {
+            color: #087e80;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* DEVELOPER SECTION */
+
+        .developer {
+            padding: 80px 8%;
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    #c2e8da 0,
+                    transparent 30%
+                ),
+                #e9f2ed;
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .developer-photo {
+            width: 100%;
+            max-width: 350px;
+            margin: auto;
+            position: relative;
+        }
+
+        .developer-photo::before {
+            content: "";
+            position: absolute;
+            inset: -12px 12px 12px -12px;
+            border: 2px solid #138c85;
+            border-radius: 21px;
+        }
+
+        .developer-photo img {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 19px;
+            box-shadow: 0 15px 40px #0c19321a;
+        }
+
+        .developer-text > span {
+            color: #087e80;
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 3px;
+        }
+
+        .developer-text h2 {
+            font-size: clamp(30px, 4vw, 40px);
+            margin: 17px 0;
+        }
+
+        .developer-text p {
+            color: #586a7a;
+            font-size: 15px;
+            line-height: 2;
+            margin-bottom: 18px;
+        }
+
+        .signature {
+            display: inline-block;
+            border-left: 3px solid #138c85;
+            padding: 5px 0 5px 14px;
+            font-weight: 750;
+            color: #19385a;
+            margin: 5px 0 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 32px 8%;
+            text-align: center;
+            background: var(--navy);
+            color: #c2cede;
+        }
+
+        .footer-brand {
+            color: white;
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand span {
+            color: var(--teal);
+        }
+
+        footer p {
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        footer .copyright {
+            border-top: 1px solid #ffffff1c;
+            margin-top: 20px;
+            padding-top: 18px;
+            color: #8fa3ba;
+            font-size: 11px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 850px) {
+            header {
+                justify-content: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 17px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 60px 7%;
+                gap: 45px;
+            }
+
+            .hero-content > p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-art {
+                max-width: 420px;
+                margin: 10px auto;
+            }
+
+            .overview {
+                padding: 25px 4%;
+                gap: 8px;
+            }
+
+            .overview-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: auto;
+            }
+
+            .developer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .signature {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            .brand-name {
+                font-size: 23px;
+            }
+
+            nav {
+                gap: 13px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            nav .nav-button {
+                padding: 9px 12px;
+            }
+
+            .hero {
+                padding: 48px 6%;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-content > p {
+                font-size: 14px;
+            }
+
+            .hero-art img {
+                height: 285px;
+            }
+
+            .floating-card {
+                left: -8px;
+                bottom: 20px;
+            }
+
+            .overview-item small {
+                font-size: 10px;
+            }
+
+            .overview-item strong {
+                font-size: 12px;
+            }
+
+            .services {
+                padding: 65px 6%;
+            }
+
+            .developer {
+                padding: 60px 7%;
+            }
+
+            .developer-photo {
+                max-width: 290px;
+            }
+
+            .developer-photo img {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+    <a href="index.html" class="brand">
+        <div class="logo-icon">🐾</div>
+
+        <div>
+            <div class="brand-name">LP <span>PetCare</span></div>
+            <small>LOVE · PROTECT · CARE</small>
+        </div>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="owners.html">Owners</a>
+        <a href="pets.html">Pets</a>
+        <a href="appointments.html">Appointments</a>
+        <a href="owners.html" class="nav-button">Get Started ↗</a>
+    </nav>
+</header>
+
+<!-- HOME SECTION -->
+
+<main>
+    <section class="hero">
+
+        <div class="paw-pattern"></div>
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+
+        <div class="hero-content">
+            <span class="eyebrow">✦ A LITTLE LOVE GOES A LONG WAY</span>
+
+            <h1>
+                Their World.<br>
+                Your Love.<br>
+                <span>Our Care.</span>
+            </h1>
+
+            <p>
+                Welcome to LP PetCare, a special place to keep
+                your furry friends' details organized, manage
+                pet profiles, and keep track of veterinary visits.
+                Because every little paw deserves the best care.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="pets.html" class="button button-primary">
+                    Explore Pet Care →
+                </a>
+
+                <a href="appointments.html"
+                   class="button button-outline">
+                    Book an Appointment
+                </a>
+            </div>
+
+            <div class="hero-note">
+                ♥ Made with care by Lakshmi Prasanna
+            </div>
+        </div>
+
+        <div class="hero-art">
+            <img
+                src="images/myphoto.jpeg"
+                alt="Lakshmi Prasanna with her adorable dog">
+
+            <div class="floating-card">
+                <strong>♥ Every Paw Matters</strong>
+                <small>A little care. A lot of love.</small>
+            </div>
+
+            <div class="floating-heart">♥</div>
+        </div>
+
+    </section>
+
+    <!-- QUICK OVERVIEW -->
+
+    <section class="overview">
+        <div class="overview-item">
+            <div class="overview-icon">🐾</div>
+            <div>
+                <strong>Pet Profiles</strong>
+                <small>Keep pet records organized</small>
+            </div>
+        </div>
+
+        <div class="overview-item">
+            <div class="overview-icon">♡</div>
+            <div>
+                <strong>Owner Records</strong>
+                <small>Manage owner information</small>
+            </div>
+        </div>
+
+        <div class="overview-item">
+            <div class="overview-icon">✚</div>
+            <div>
+                <strong>Vet Visits</strong>
+                <small>Track appointments</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+
+    <section class="services">
+        <div class="section-heading">
+            <span>YOUR PET'S WELL-BEING</span>
+
+            <h2>Care Made Simple.</h2>
+
+            <p>
+                Three helpful features to make managing your
+                pet's information easier and more organized.
+            </p>
+        </div>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <div class="service-icon">🐶</div>
+
+                <h3>Pet Management</h3>
+
+                <p>
+                    Store pet names, breeds, ages, and owner
+                    details in one organized place.
+                </p>
+
+                <a href="pets.html">Explore Pets →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💚</div>
+
+                <h3>Owner Management</h3>
+
+                <p>
+                    Register pet owners and maintain their
+                    contact information conveniently.
+                </p>
+
+                <a href="owners.html">Explore Owners →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📅</div>
+
+                <h3>Appointment Care</h3>
+
+                <p>
+                    Organize veterinary appointment dates
+                    and keep visit reasons recorded.
+                </p>
+
+                <a href="appointments.html">Explore Appointments →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT THE DEVELOPER -->
+
+    <section class="developer">
+
+        <div class="developer-photo">
+            <img
+                src="images/doctor.jpeg"
+                alt="Lakshmi Prasanna with her dog">
+        </div>
+
+        <div class="developer-text">
+            <span>MEET THE DEVELOPER</span>
+
+            <h2>Hello, Pet Lovers! 💚</h2>
+
+            <p>
+                Hi! I'm Lakshmi Prasanna, the student developer
+                behind LP PetCare. I created this project to
+                bring pet information and appointment management
+                together in one simple website.
+            </p>
+
+            <p>
+                Built as a Full Stack Development project,
+                LP PetCare combines a user-friendly design
+                with database management to help keep pet
+                records organized.
+            </p>
+
+            <div class="signature">
+                Lakshmi Prasanna<br>
+                <span style="font-size:12px;font-weight:500;">
+                    Creator of LP PetCare
+                </span>
+            </div>
+
+            <div>
+                <a href="owners.html" class="button button-primary">
+                    Get Started →
+                </a>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-brand">LP <span>PetCare</span> 🐾</div>
+
+    <p>Every little paw deserves love, comfort, and care.</p>
+
+    <p>Home · Owners · Pets · Appointments</p>
+
+    <div class="copyright">
+        © 2026 LP PetCare | Created by Lakshmi Prasanna
+    </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

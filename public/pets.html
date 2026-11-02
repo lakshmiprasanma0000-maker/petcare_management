@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pets | LP PetCare</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #0c1932;
+    --navy2: #142c4a;
+    --teal: #69e0ce;
+    --cream: #f7f8f4;
+    --text: #20334b;
+    --muted: #738094;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+}
+
+header {
+    background: var(--navy);
+    color: white;
+    padding: 17px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    background: var(--teal);
+    color: var(--navy);
+    height: 48px;
+    width: 48px;
+    border-radius: 15px 15px 15px 5px;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+}
+
+.brand h2 {
+    font-size: 24px;
+}
+
+.brand h2 span,
+footer span {
+    color: var(--teal);
+}
+
+.brand small {
+    display: block;
+    color: #b9c9d9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 3px;
+}
+
+nav {
+    display: flex;
+    gap: 23px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: #e2eaf4;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--teal);
+}
+
+/* HERO BANNER */
+
+.banner {
+    padding: 52px 7%;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 85% 25%, #16817c 0, transparent 30%),
+        radial-gradient(circle at 5% 95%, #345b7e 0, transparent 36%),
+        var(--navy);
+}
+
+.banner::after {
+    content: "🐾";
+    position: absolute;
+    right: 7%;
+    top: 8px;
+    font-size: 165px;
+    opacity: 0.12;
+    transform: rotate(-20deg);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+}
+
+.banner small {
+    color: var(--teal);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.banner h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1.15;
+    margin: 16px 0;
+}
+
+.banner h1 span {
+    color: var(--teal);
+}
+
+.banner p {
+    color: #c4d0df;
+    line-height: 1.9;
+    max-width: 570px;
+    font-size: 15px;
+}
+
+/* PET PHOTO CARDS */
+
+.pet-gallery {
+    max-width: 1150px;
+    margin: 38px auto 10px;
+    padding: 0 22px;
+}
+
+.gallery-title {
+    text-align: center;
+    margin-bottom: 23px;
+}
+
+.gallery-title h2 {
+    font-size: 26px;
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+
+.gallery-title p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.pet-card {
+    background: white;
+    border-radius: 17px;
+    overflow: hidden;
+    border: 1px solid #e4ece9;
+    box-shadow: 0 8px 24px #142c4a0b;
+    transition: transform 0.25s;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+}
+
+.pet-card img {
+    display: block;
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    background: #dcebe7;
+}
+
+.pet-card div {
+    padding: 15px;
+}
+
+.pet-card h3 {
+    color: var(--navy);
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.pet-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* REGISTRATION AND TABLE */
+
+.main {
+    max-width: 1150px;
+    margin: 38px auto 55px;
+    padding: 0 22px;
+}
+
+.panel {
+    background: white;
+    padding: 30px;
+    border: 1px solid #e5eae6;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px #142c4a0b;
+    margin-bottom: 28px;
+    min-width: 0;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    padding-bottom: 19px;
+    border-bottom: 1px solid #e7ecea;
+}
+
+.panel-heading h2 {
+    color: var(--navy);
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.panel-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.section-label {
+    color: #087e80;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 24px 0 17px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.field {
+    margin-bottom: 19px;
+    min-width: 0;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 9px;
+    color: #26394e;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid #dce4e7;
+    border-radius: 9px;
+    background: #fbfcfc;
+    color: var(--text);
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2bada0;
+    box-shadow: 0 0 0 3px #69e0ce25;
+    background: white;
+}
+
+.submit-btn,
+.refresh-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 14px 18px;
+    background: var(--navy);
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.submit-btn:hover,
+.refresh-btn:hover {
+    background: #087e80;
+}
+
+.submit-btn:disabled,
+.refresh-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+#message {
+    display: none;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+#message.success {
+    display: block;
+    background: #e6f7ef;
+    color: #176b48;
+}
+
+#message.error {
+    display: block;
+    background: #fff0ee;
+    color: #a12e25;
+}
+
+/* TABLE */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 15px 14px;
+    border-bottom: 1px solid #e8ecef;
+    font-size: 13px;
+}
+
+th {
+    background: #eaf8f4;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+tbody tr:hover {
+    background: #f8fbfa;
+}
+
+.empty {
+    text-align: center;
+    padding: 25px;
+    color: var(--muted);
+}
+
+#tableMessage {
+    margin-top: 15px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* FOOTER */
+
+footer {
+    background: var(--navy);
+    color: #b9c8d8;
+    text-align: center;
+    padding: 27px 15px;
+    font-size: 12px;
+    line-height: 2;
+}
+
+footer strong {
+    color: white;
+    font-size: 19px;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .panel {
+        padding: 23px 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .pet-card img {
+        height: 130px;
+    }
+
+    .banner {
+        padding: 40px 6%;
+    }
+
+    .main,
+    .pet-gallery {
+        padding: 0 14px;
+    }
+
+    .brand h2 {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a class="brand" href="index.html">
+        <div class="logo">🐾</div>
+        <div>
+            <h2>LP <span>PetCare</span></h2>
+            <small>LOVE · PROTECT · CARE</small>
+        </div>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="owners.html">Owners</a>
+        <a href="pets.html" class="active">Pets</a>
+        <a href="appointments.html">Appointments</a>
+    </nav>
+</header>
+
+<section class="banner">
+    <div class="banner-content">
+        <small>LP PETCARE · PET MANAGEMENT</small>
+        <h1>Every Paw Has a <span>Story.</span></h1>
+        <p>
+            Welcome to our pet family! Register your beloved
+            companions, keep their details organized, and make
+            their care a little easier with LP PetCare.
+        </p>
+    </div>
+</section>
+
+<!-- PET PHOTO GALLERY -->
+
+<section class="pet-gallery">
+    <div class="gallery-title">
+        <h2>Our Lovely Friends 🐾</h2>
+        <p>Every pet deserves a safe home and a little extra love.</p>
+    </div>
+
+    <div class="gallery">
+        <article class="pet-card">
+            <img
+                src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=600&q=80"
+                alt="Happy golden dog"
+                loading="lazy">
+            <div>
+                <h3>Dogs</h3>
+                <p>Loyal friends who fill our lives with happiness.</p>
+            </div>
+        </article>
+
+        <article class="pet-card">
+            <img
+                src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=600&q=80"
+                alt="Cute cat"
+                loading="lazy">
+            <div>
+                <h3>Cats</h3>
+                <p>Little companions with big personalities.</p>
+            </div>
+        </article>
+
+        <article class="pet-card">
+            <img
+                src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=600&q=80"
+                alt="Cute rabbit"
+                loading="lazy">
+            <div>
+                <h3>Rabbits</h3>
+                <p>Gentle, curious, and full of charm.</p>
+            </div>
+        </article>
+
+        <article class="pet-card">
+            <img
+                src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=600&q=80"
+                alt="Colorful pet bird"
+                loading="lazy">
+            <div>
+                <h3>Birds</h3>
+                <p>Beautiful little friends that brighten every day.</p>
+            </div>
+        </article>
+    </div>
+</section>
+
+<main class="main">
+
+    <!-- PET REGISTRATION FORM -->
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h2>🐾 Register Your Pet</h2>
+                <p>Enter the pet details to add a new record.</p>
+            </div>
+        </div>
+
+        <div id="message" role="status" aria-live="polite"></div>
+
+        <form id="petForm">
+
+            <div class="section-label">01 — PET INFORMATION</div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="petName">Pet Name *</label>
+                    <input
+                        type="text"
+                        id="petName"
+                        name="pet_name"
+                        placeholder="e.g. Bruno"
+                        maxlength="100"
+                        required>
+                </div>
+
+                <div class="field">
+                    <label for="species">Species *</label>
+                    <select id="species" name="species" required>
+                        <option value="">Select species</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Rabbit">Rabbit</option>
+                        <option value="Bird">Bird</option>
+                        <option value="Fish">Fish</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="breed">Breed *</label>
+                    <input
+                        type="text"
+                        id="breed"
+                        name="breed"
+                        placeholder="e.g. Labrador Retriever"
+                        maxlength="100"
+                        required>
+                </div>
+
+                <div class="field">
+                    <label for="age">Age (years) *</label>
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        placeholder="Enter age"
+                        min="0"
+                        max="100"
+                        step="1"
+                        required>
+                </div>
+            </div>
+
+            <div class="section-label">02 — OWNER LINK</div>
+
+            <div class="field">
+                <label for="ownerId">Owner ID *</label>
+                <input
+                    type="number"
+                    id="ownerId"
+                    name="owner_id"
+                    placeholder="Enter an existing owner ID"
+                    min="1"
+                    step="1"
+                    required>
+                <small style="display:block;color:#738094;margin-top:8px;font-size:12px;">
+                    Enter an owner_id that already exists in your owners table.
+                </small>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Register Pet →
+            </button>
+
+        </form>
+    </section>
+
+    <!-- ALL PETS TABLE -->
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h2>📋 All Registered Pets</h2>
+                <p>View all pet records stored in your MySQL database.</p>
+            </div>
+
+            <button type="button" class="refresh-btn" id="refreshBtn">
+                ↻ Refresh
+            </button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>pet_id</th>
+                        <th>owner_id</th>
+                        <th>pet_name</th>
+                        <th>species</th>
+                        <th>breed</th>
+                        <th>age</th>
+                    </tr>
+                </thead>
+
+                <tbody id="petsTable">
+                    <tr>
+                        <td colspan="6" class="empty">
+                            Loading pets...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p id="tableMessage" role="status" aria-live="polite"></p>
+    </section>
+
+</main>
+
+<footer>
+    <strong>LP <span>PetCare</span> 🐾</strong>
+    <p>Every little paw deserves love, comfort, and care.</p>
+    <p>Created with care by Lakshmi Prasanna</p>
+</footer>
+
+<script>
+const form = document.getElementById("petForm");
+const message = document.getElementById("message");
+const petsTable = document.getElementById("petsTable");
+const tableMessage = document.getElementById("tableMessage");
+const refreshBtn = document.getElementById("refreshBtn");
+
+function showMessage(text, type) {
+    message.textContent = text;
+    message.className = type;
+    message.style.display = "block";
+}
+
+// Display all pets from MySQL.
+async function loadPets() {
+    petsTable.replaceChildren();
+
+    const loadingRow = document.createElement("tr");
+    const loadingCell = document.createElement("td");
+    loadingCell.colSpan = 6;
+    loadingCell.className = "empty";
+    loadingCell.textContent = "Loading pets...";
+    loadingRow.appendChild(loadingCell);
+    petsTable.appendChild(loadingRow);
+
+    tableMessage.textContent = "";
+
+    try {
+        const response = await fetch("/api/pets");
+
+        if (!response.ok) {
+            throw new Error("Unable to load pet records.");
+        }
+
+        const pets = await response.json();
+
+        if (!Array.isArray(pets)) {
+            throw new Error("Unexpected data received from the server.");
+        }
+
+        petsTable.replaceChildren();
+
+        if (pets.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 6;
+            cell.className = "empty";
+            cell.textContent = "No pets registered yet.";
+            row.appendChild(cell);
+            petsTable.appendChild(row);
+            tableMessage.textContent = "Total pets: 0";
+            return;
+        }
+
+        pets.forEach(pet => {
+            const row = document.createElement("tr");
+
+            [
+                pet.pet_id,
+                pet.owner_id,
+                pet.pet_name,
+                pet.species,
+                pet.breed,
+                pet.age
+            ].forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value ?? "-";
+                row.appendChild(cell);
+            });
+
+            petsTable.appendChild(row);
+        });
+
+        tableMessage.textContent = "Total pets: " + pets.length;
+
+    } catch (error) {
+        petsTable.replaceChildren();
+
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 6;
+        cell.className = "empty";
+        cell.textContent =
+            "Unable to load pets. Check that your server and GET /api/pets route are running.";
+        row.appendChild(cell);
+        petsTable.appendChild(row);
+    }
+}
+
+// Register a new pet.
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const pet = {
+        owner_id: Number(document.getElementById("ownerId").value),
+        pet_name: document.getElementById("petName").value.trim(),
+        species: document.getElementById("species").value,
+        breed: document.getElementById("breed").value.trim(),
+        age: Number(document.getElementById("age").value)
+    };
+
+    if (
+        !Number.isInteger(pet.owner_id) ||
+        pet.owner_id < 1 ||
+        !Number.isInteger(pet.age) ||
+        pet.age < 0
+    ) {
+        showMessage(
+            "Please enter a valid owner ID and a whole-number age of zero or more.",
+            "error"
+        );
+        return;
+    }
+
+    const button = form.querySelector(".submit-btn");
+    button.disabled = true;
+    button.textContent = "Registering...";
+
+    try {
+        const response = await fetch("/api/pets", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(pet)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Unable to register pet.");
+        }
+
+        showMessage(
+            result.message || "Pet registered successfully!",
+            "success"
+        );
+
+        form.reset();
+
+        // Display the new record in the table.
+        await loadPets();
+
+    } catch (error) {
+        showMessage(
+            error.message === "Failed to fetch"
+                ? "Could not connect to the server. Start your Node.js server and check the API routes."
+                : error.message,
+            "error"
+        );
+    } finally {
+        button.disabled = false;
+        button.textContent = "Register Pet →";
+    }
+});
+
+refreshBtn.addEventListener("click", loadPets);
+
+// Load existing records when the page opens.
+loadPets();
+</script>
+<script src="script.js"></script>
+</body>
+</html>
